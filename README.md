@@ -15,5 +15,12 @@ The annotated data is of much higher quality than another dataset e.g. MORPH (sa
  - <del> Link: 
   - <del> [1] http://www.cbsr.ia.ac.cn/users/dyi/agr.html
   - <del> [2] https://ebill.uncw.edu/C20231_ustores/web/classic/product_detail.jsp?PRODUCTID=8
- - <del> MORPH Album 2 [1] contains about 55,000 face images of more than 13,000 subjects. The capture time spans from 2003 to 2007. Age ranges from 16 to 77 years. Although it is a good and large database, the distributions of gender and ethnicity are uneven. The Male-Female ratio is about 5.5 : 1 and the White-Black ratio is about 4 : 1. Except for White and Black, the proportion of other ethnicity is very low (4%). For more information, refer to the link posted.
+ - <del> Desc: MORPH Album 2 [1] contains about 55,000 face images of more than 13,000 subjects. The capture time spans from 2003 to 2007. Age ranges from 16 to 77 years. Although it is a good and large database, the distributions of gender and ethnicity are uneven. The Male-Female ratio is about 5.5 : 1 and the White-Black ratio is about 4 : 1. Except for White and Black, the proportion of other ethnicity is very low (4%). For more information, refer to the link posted.
 
+4. LFW
+ - Link: http://vis-www.cs.umass.edu/lfw
+ - Desc: Welcome to Labeled Faces in the Wild, a database of face photographs designed for studying the problem of unconstrained face recognition. The data set contains more than 13,000 images of faces collected from the web. Each face has been labeled with the name of the person pictured. 1680 of the people pictured have two or more distinct photos in the data set. The only constraint on these faces is that they were detected by the Viola-Jones face detector. More details can be found in the technical report below. There are now four different sets of LFW images including the original and three different types of "aligned" images. The aligned images include "funneled images" (ICCV 2007), LFW-a, which uses an unpublished method of alignment, and "deep funneled" images (NIPS 2012). Among these, LFW-a and the deep funneled images produce superior results for most face verification algorithms over the original images and over the funneled images (ICCV 2007).
+
+### Private Dataset
+1. CAF
+2. 
