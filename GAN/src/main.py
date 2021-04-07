@@ -40,9 +40,9 @@ def train(epoch, device, dataloader, model, criterion, optimizer):
         _, predicted = outputs.max(1)
         total += targets.size(0)
         correct += predicted.eq(targets).sum().item()
-
-        progress_bar(batch_idx, len(dataloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-                     % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
+        if batch_idx % 500 == 0:
+            progress_bar(batch_idx, len(dataloader), 'Train Loss: %.3f | Acc: %.3f%% (%d/%d)'
+                         % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
 
 
 def validate(epoch, device, dataloader, model, criterion):
@@ -63,9 +63,10 @@ def validate(epoch, device, dataloader, model, criterion):
             _, predicted = outputs.max(1)
             total += targets.size(0)
             correct += predicted.eq(targets).sum().item()
-
-            progress_bar(batch_idx, len(dataloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-                         % (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
+            
+            if batch_idx % 500 == 0:
+                progress_bar(batch_idx, len(dataloader), 'Val Loss: %.3f | Acc: %.3f%% (%d/%d)'
+                             % (test_loss/(batch_idx+1), 100.*correct/total, correct, total))
 
     # Save checkpoint
     acc = 100.*correct/total
@@ -101,14 +102,15 @@ def main(config):
     with open(os.path.join(etl_config['dataloader_dir'], "train_dataloader.pickle"), "rb") as traindl:
         train_dataloader = pickle.load(traindl)
         
-    with open(os.path.join(etl_config['dataloader_dir'], "train_dataloader.pickle"), "rb") as valdl:
+    with open(os.path.join(etl_config['dataloader_dir'], "val_dataloader.pickle"), "rb") as valdl:
         val_dataloader = pickle.load(valdl)
         
-    with open(os.path.join(etl_config['dataloader_dir'], "train_dataloader.pickle"), "rb") as testdl:
+    with open(os.path.join(etl_config['dataloader_dir'], "test_dataloader.pickle"), "rb") as testdl:
         test_dataloader = pickle.load(testdl)
 
     # load model
-    model = ResNet50(model_config)
+    model = ResNet50(model_config).to(device_use)
+    
 
     # load loss, optm, scheduler
     criterion = nn.CrossEntropyLoss()
@@ -121,7 +123,7 @@ def main(config):
     scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=200)
 
     for epoch in range(0, epochs):
-        train(epochs, device_use, train_dataloader, model, criterion, optimizer)
+        train(epoch, device_use, train_dataloader, model, criterion, optimizer)
         validate(epochs, device_use, val_dataloader, model, criterion)
         scheduler.step()
     validate(epochs, device, test_dataloader, model, criterion)

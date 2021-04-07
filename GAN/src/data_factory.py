@@ -19,8 +19,7 @@ class CIFAR10DataPrep():
         # Path parameters
         self.data_dir = transformer_config['data_dir']
         self.dataloader_dir = transformer_config['dataloader_dir']#'./data/dataloader'
-        
-        self.batch_size = 32
+        self.batch_size = transformer_config['batch_size']
         
         # Define transformers to nomalize data
         self.train_normalizer = transforms.Compose([
@@ -49,6 +48,8 @@ class CIFAR10DataPrep():
         test_dataloader = DataLoader(test_set, batch_size = self.batch_size, shuffle=False, num_workers=0)
         
         ##### saving block #####
+        if not os.path.isdir(self.dataloader_dir):
+            os.mkdir(self.dataloader_dir)
         
         pickle.dump(
             train_dataloader,
@@ -65,6 +66,7 @@ class CIFAR10DataPrep():
             open(os.path.join(self.dataloader_dir, "test_dataloader.pickle"), "wb"),
             protocol=4,
         )
+
 
 
 
