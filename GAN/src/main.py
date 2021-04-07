@@ -20,6 +20,7 @@ def load_device(cuda_idx):
     print(device)
     return device
 
+##### reference: https://github.com/kuangliu/pytorch-cifar/blob/master/utils.py#L94 #####
 def train(epoch, device, dataloader, model, criterion, optimizer):
     print('\nEpoch: %d' % epoch)
     model.train()
@@ -44,7 +45,7 @@ def train(epoch, device, dataloader, model, criterion, optimizer):
             progress_bar(batch_idx, len(dataloader), 'Train Loss: %.3f | Acc: %.3f%% (%d/%d)'
                          % (train_loss/(batch_idx+1), 100.*correct/total, correct, total))
 
-
+##### reference: https://github.com/kuangliu/pytorch-cifar/blob/master/utils.py#L94 #####
 def validate(epoch, device, dataloader, model, criterion):
     global best_acc
     best_acc = -1
